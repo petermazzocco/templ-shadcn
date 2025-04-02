@@ -2,44 +2,63 @@ package component
 
 import "templ-shadcn/internal/util"
 
-templ CardHeader(className ...string) {
-    <div class={util.Cn("flex flex-col items-start p-6 pt-6"), className}>
-        { children... }
-    </div>
+type CardProps struct {
+	ClassName []string
 }
 
-templ CardTitle(className ...string) {
-    <h2 class="text-2xl font-semibold leading-none tracking-tight">
-        { children... }
-    </h2>
+// NewCardProps creates CardProps with default values
+func NewCardProps() CardProps {
+	return CardProps{
+		ClassName: []string{},
+	}
 }
 
-templ CardDescription(className ...string) {
-    <p class="text-sm text-muted-foreground">
-        { children... }
-    </p>
+templ CardHeader(props ...CardProps) {
+	<div class={ util.Cn("flex flex-col items-start p-6 pt-6"), getProps(props...).ClassName }>
+		{ children... }
+	</div>
 }
 
-templ CardBody(className ...string) {
-    <div class={util.Cn("flex flex-col space-y-1.5 p-6"), className}>
-        { children... }
-    </div>
+templ CardTitle(props ...CardProps) {
+	<h2 class={ util.Cn("text-2xl font-semibold leading-none tracking-tight"), getProps(props...).ClassName }>
+		{ children... }
+	</h2>
 }
 
-templ CardContent(className ...string) {
-    <div class={util.Cn("p-6 pt-0"), className}>
-        { children... }
-    </div>
+templ CardDescription(props ...CardProps) {
+	<p class={ util.Cn("text-sm text-muted-foreground"), getProps(props...).ClassName }>
+		{ children... }
+	</p>
 }
 
-templ CardFooter(className ...string) {
-    <div class={util.Cn("flex items-center p-6 pt-0"), className}>
-        { children... }
-    </div>
+templ CardBody(props ...CardProps) {
+	<div class={ util.Cn("flex flex-col space-y-1.5 p-6"), getProps(props...).ClassName }>
+		{ children... }
+	</div>
 }
 
-templ Card(className ...string) {
-    <div class={util.Cn("rounded-lg border bg-card text-card-foreground shadow-sm"), className}>
-        { children... }
-    </div>
+templ CardContent(props ...CardProps) {
+	<div class={ util.Cn("p-6 pt-0"), getProps(props...).ClassName }>
+		{ children... }
+	</div>
+}
+
+templ CardFooter(props ...CardProps) {
+	<div class={ util.Cn("flex items-center p-6 pt-0"), getProps(props...).ClassName }>
+		{ children... }
+	</div>
+}
+
+templ Card(props ...CardProps) {
+	<div class={ util.Cn("rounded-lg border bg-card text-card-foreground shadow-sm"), getProps(props...).ClassName }>
+		{ children... }
+	</div>
+}
+
+// Helper function to get props with defaults
+func getProps(props ...CardProps) CardProps {
+	if len(props) == 0 {
+		return NewCardProps()
+	}
+	return props[0]
 }

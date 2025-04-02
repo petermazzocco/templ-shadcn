@@ -1,0 +1,36 @@
+package component
+
+import "templ-shadcn/internal/util"
+
+type InputProps struct {
+	ClassName   []string
+	Type        string
+	Name        string
+	Placeholder string
+}
+
+func NewInputProps() InputProps {
+	return InputProps{
+		ClassName:   []string{},
+		Type:        "text",
+		Name:        "",
+		Placeholder: "",
+	}
+}
+
+templ Input(props ...InputProps) {
+	<input
+		name={ getInputProps(props...).Name }
+		placeholder={ getInputProps(props...).Placeholder }
+		type={ getInputProps(props...).Type }
+		class={ util.Cn("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"), getInputProps(props...).ClassName }
+	/>
+}
+
+// Helper function to get props with defaults
+func getInputProps(props ...InputProps) InputProps {
+	if len(props) == 0 {
+		return NewInputProps()
+	}
+	return props[0]
+}

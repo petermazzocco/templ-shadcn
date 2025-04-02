@@ -1,0 +1,122 @@
+package pages
+
+import ui "templ-shadcn/internal/component/ui"
+
+templ HomePage() {
+	<div class="p-6 grid gap-4 flex flex-col items-center container mx-auto max-w-2xl">
+		// Parent card
+		@ui.Card(ui.CardProps{
+			ClassName: []string{"w-[350px] md:w-[500px] mx-auto"},
+		}) {
+			// Card Header
+			@ui.CardHeader() {
+				@ui.CardTitle() {
+					Welcome to templ-shadcn
+				}
+				@ui.CardDescription() {
+					The ease of Shadcn. The power of Golang, HTMX and Templ.
+				}
+			}
+			// Card Content
+			@ui.CardContent() {
+				<div class="flex flex-col gap-2">
+					<h3 class="text-foreground text-lg">How does it work?</h3>
+					<ol class="text-primary flex flex-col gap-2">
+						<li>All styled components live in the <code class="bg-accent text-xs p-0.5 border border-input text-primary/80 rounded-md">/internal/component/ui</code> folder</li>
+						<li>Install new components with the command: <code class="bg-accent text-xs p-0.5 border border-input text-primary/80 rounded-md">go install </code> </li>
+						<li>Import components into the <code class="bg-accent text-xs p-0.5 border border-input text-primary/80 rounded-md">/template</code>folder</li>
+					</ol>
+				</div>
+			}
+			// Card Footer
+			@ui.CardFooter(ui.CardProps{
+				ClassName: []string{"w-full"},
+			}) {
+				@ui.LinkButton("/components", "default", "sm", "w-full") {
+					View All Components
+				}
+			}
+		}
+		// Hello World Card
+		@ui.Card(ui.CardProps{
+			ClassName: []string{"w-[350px] md:w-[500px] mx-auto"},
+		}) {
+			// Card Header
+			@ui.CardHeader() {
+				@ui.CardTitle() {
+					Test out HTMX 
+				}
+				@ui.CardDescription() {
+					Click the button below to see the message appear 👇
+				}
+			}
+			// Card Content
+			@ui.CardContent() {
+				<div id="helloWorld" class="mt-4">
+					<!-- The response will be inserted here -->
+				</div>
+			}
+			// Card Footer
+			@ui.CardFooter(ui.CardProps{
+				ClassName: []string{"w-full"},
+			}) {
+				@ui.Button(ui.ButtonProps{
+					Type:      "button",
+					Variant:   ui.ButtonVariantDefault,
+					Size:      ui.ButtonSizeDefault,
+					HxPost:    "/hello-world",
+					HxSwap:    "innerHTML",
+					HxTarget:  "#helloWorld",
+					ClassName: []string{"w-full"},
+				}) {
+					Say Hello World!
+				}
+			}
+		}
+		// Form!!
+		@ui.Card(ui.CardProps{
+			ClassName: []string{"w-[350px] md:w-[500px] mx-auto"},
+		}) {
+			// Card Header
+			@ui.CardHeader() {
+				@ui.CardTitle() {
+					Enter your name
+				}
+				@ui.CardDescription() {
+					Drop your name and we'll say hello to you! We dare you to enter anything but a <code class="bg-accent text-xs p-0.5 border border-input text-red-500 rounded-md">string</code> value
+				}
+			}
+			// Card Content
+			@ui.CardContent() {
+				<div id="helloName" class="mt-4">
+					<!-- The response will be inserted here -->
+				</div>
+			}
+			// Card Footer
+			@ui.CardFooter(ui.CardProps{
+				ClassName: []string{"w-full"},
+			}) {
+				<form
+					id="nameForm"
+					hx-post="/hello-name"
+					hx-trigger="submit"
+					hx-target="#helloName"
+					hx-swap="innerHTML"
+					class="flex flex-col gap-4 w-full"
+				>
+					@ui.Input(ui.InputProps{
+						ClassName:   []string{"w-full"},
+						Name:        "name",
+						Placeholder: "Enter your name here...",
+					})
+					@ui.Button(ui.ButtonProps{
+						Type:      "submit",
+						ClassName: []string{"w-full"},
+					}) {
+						Submit Name
+					}
+				</form>
+			}
+		}
+	</div>
+}

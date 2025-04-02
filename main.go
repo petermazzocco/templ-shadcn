@@ -31,6 +31,18 @@ func main() {
 		middleware.RenderComponent(w, r, component.HelloWorldResponse())
 	})
 
+	mux.HandleFunc("POST /hello-name", func(w http.ResponseWriter, r *http.Request) {
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "Failed to parse form", http.StatusBadRequest)
+			return
+		}
+		name := r.FormValue("name")
+		if name == "" {
+			name = "Anonymous"
+		}
+		middleware.RenderComponent(w, r, component.HelloNameResponse(name))
+	})
+
 	// Landing page route
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {

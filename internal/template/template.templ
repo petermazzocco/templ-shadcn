@@ -1,9 +1,10 @@
 package template
 
-import ui "templ-shadcn/internal/component/ui"
+import "templ-shadcn/internal/template/pages"
+
 import component "templ-shadcn/internal/component"
 
-templ Base() {
+templ Layout() {
 	<html>
 		<head>
 			<meta charset="UTF-8"/>
@@ -11,6 +12,14 @@ templ Base() {
 			<script src="https://unpkg.com/htmx.org@1.9.11"></script>
 			<link rel="stylesheet" href="/static/css/output.css"/>
 			<title>templ-shadcn</title>
+			<meta name="description" content="The ease of Shadcn. The power of Golang, HTMX and Templ."/>
+			<meta property="og:title" content="templ-shadcn"/>
+			<meta property="og:description" content="The ease of Shadcn. The power of Golang, HTMX and Templ."/>
+			<meta property="og:image" content="/static/images/og-image.png"/>
+			<meta name="twitter:card" content="summary_large_image"/>
+			<meta name="twitter:title" content="templ-shadcn"/>
+			<meta name="twitter:description" content="The ease of Shadcn. The power of Golang, HTMX and Templ."/>
+			<meta name="twitter:image" content="/static/images/og-image.png"/>
 		</head>
 		<body class="bg-background min-h-screen">
 			<main>
@@ -23,78 +32,14 @@ templ Base() {
 
 // Landing page route!("GET /")
 templ Home() {
-	@Base() {
-		<div class="p-6 grid gap-4 flex flex-col items-center container mx-auto max-w-2xl">
-			// Parent card
-			@ui.Card("w-[500px] mx-auto") {
-				// Card Header
-				@ui.CardHeader() {
-					@ui.CardTitle() {
-						Welcome to templ-shadcn
-					}
-					@ui.CardDescription() {
-						The ease of Shadcn. The power of Golang, HTMX and Templ.
-					}
-				}
-				// Card Content
-				@ui.CardContent() {
-					<div class="flex flex-col gap-2">
-						<h3 class="text-foreground text-lg">How does it work?</h3>
-						<ol class="text-primary flex flex-col gap-2">
-							<li>All styled components live in the <code class="bg-accent text-xs p-0.5 border border-input text-primary/80 rounded-md">/internal/component/ui</code> folder</li>
-							<li>Install new components with the command: <code class="bg-accent text-xs p-0.5 border border-input text-primary/80 rounded-md">go install </code> </li>
-							<li>Import components into the <code class="bg-accent text-xs p-0.5 border border-input text-primary/80 rounded-md">/template</code>folder</li>
-						</ol>
-					</div>
-				}
-				// Card Footer
-				@ui.CardFooter("w-full") {
-					@ui.LinkButton("/components", "default", "sm", "w-full") {
-						View All Components
-					}
-				}
-			}
-			@ui.Card("w-[500px] mx-auto") {
-				// Card Header
-				@ui.CardHeader() {
-					@ui.CardTitle() {
-						Test out HTMX 
-					}
-					@ui.CardDescription() {
-						Click the button below to see the message appear 👇
-					}
-				}
-				// Card Content
-				@ui.CardContent() {
-					<div id="helloWorld" class="mt-4">
-						<!-- The response will be inserted here -->
-					</div>
-				}
-				// Card Footer
-				@ui.CardFooter("w-full") {
-					@ui.Button(ui.ButtonProps{
-						Type:      "button",
-						Variant:   ui.ButtonVariantDefault,
-						Size:      ui.ButtonSizeDefault,
-						HxPost:    "/hello-world",
-						HxSwap:    "innerHTML",
-						HxTarget:  "#helloWorld",
-						ClassName: []string{"w-full"},
-					}) {
-						Say Hello World!
-					}
-				}
-			}
-			// Add a container with the target ID
-		</div>
+	@Layout() {
+		@pages.HomePage()
 	}
 }
 
 // Components page route!("GET /components")
 templ Components() {
-	@Base() {
-		<div class="p-6 grid gap-4 flex flex-col items-center container mx-auto max-w-2xl">
-			<p class="text-foreground">All Components</p>
-		</div>
+	@Layout() {
+		@pages.ComponentsPage()
 	}
 }
