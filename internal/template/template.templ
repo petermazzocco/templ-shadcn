@@ -1,6 +1,6 @@
 package template
 
-import "xerus/internal/component"
+import "templ-shadcn/internal/component"
 
 
 templ Base(title string) {
@@ -12,9 +12,8 @@ templ Base(title string) {
             <link rel="stylesheet" href="/static/css/output.css"></link>
             <title>{title}</title>
         </head>
-            @component.Banner()
-        <body>
-            <main class="p-6 grid gap-4">
+        <body class="bg-background">
+            <main class="p-6 grid gap-4 flex flex-col min-h-screen items-center container mx-auto max-w-2xl">
                 { children... }
             </main>
         </body>
@@ -24,10 +23,53 @@ templ Base(title string) {
 
 
 // route!("GET /")
-// middleware!(ParseForm)
 templ Home(title string) {
     @Base(title) {
-        @component.TextAndTitle("I'm a Component!", "I am included as a content item in the Base Template!")
-		@component.TextAndTitle("I'm another Component!", "I am also included in the Base Template!")
+        // Parent card
+        @component.Card("mx-auto max-w-4xl") {
+            
+            // Card Header
+            @component.CardHeader() {
+                @component.CardTitle() {
+                    Shadcn + Golang + Templ + HTMX
+                }
+                @component.CardDescription() {
+                    This is a simple card component using Shadcn, Golang, Templ, and HTMX.
+                }
+            }
+            // Card Content
+            @component.CardContent() {
+                <div class="flex flex-col gap-2">
+                    <h3 class="text-foreground">Welcome to the contents of this card</h3>
+                    <ul class="text-primary">
+                        <li>Uses Shadcn style components</li>
+                        <li>Render with templ</li>
+                        <li>Served via Golang and HTMX</li>
+                    </ul>
+                </div>
+            }
+
+            // Card Footer
+            @component.CardFooter("w-full") {
+                <button class="bg-primary p-2 w-full rounded-md">Get More Information</button>
+            }
+        }
+        <div class="flex flex-col gap-4"> 
+            // Checkbox for Terms and Conditions with ID, name, and initial state (unchecked)
+            @component.Checkbox("terms-checkbox", "terms", false, false) {
+                Please follow me on <a href="https://bsky.app/profile/hellopeter.dev" target="_blank" class="text-primary underline">Bluesky</a>
+            }
+
+            // Checkbox for newsletter subscription (pre-checked)
+            @component.Checkbox("newsletter", "newsletter", true, false, "") {
+                Subscribe to our newsletter
+            }
+
+            // Disabled checkbox example
+            @component.Checkbox("disabled-example", "disabled-example", false, true, "opacity-50 cursor-not-allowed") {
+                This option is currently unavailable
+            }
+        </div>
     }
+    
 }

@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"xerus/internal/generate"
-	"xerus/internal/middleware"
-	"xerus/internal/template"
-	"xerus/internal/view"
+	"templ-shadcn/internal/generate"
+	"templ-shadcn/internal/middleware"
+	"templ-shadcn/internal/template"
+	"templ-shadcn/internal/view"
 
 	"github.com/joho/godotenv"
 )
