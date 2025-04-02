@@ -50,6 +50,7 @@ As mentioned above, this project depends on some awesome technologies. Let me st
 - [Air](https://github.com/cosmtrek/air)
 - [Htmx](https://htmx.org/)
 - [Tailwindcss](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
 
 ## Installation
 

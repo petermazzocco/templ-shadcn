@@ -4,28 +4,30 @@ import ui "templ-shadcn/internal/component/ui"
 import component "templ-shadcn/internal/component"
 
 
-templ Base(title string) {
+templ Base() {
     <html>
         <head>
             <meta charset="UTF-8"></meta>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
             <script src="https://unpkg.com/htmx.org@1.9.11"></script>
             <link rel="stylesheet" href="/static/css/output.css"></link>
-            <title>{title}</title>
+            <title>templ-shadcn</title>
         </head>
-        <body class="bg-background">
-            <main class="p-6 grid gap-4 flex flex-col min-h-screen items-center container mx-auto max-w-2xl">
+        <body class="bg-background min-h-screen">
+            <main>
                 { children... }
             </main>
         </body>
     </html>
+    @component.Footer()
 }
 
 
 
-// route!("GET /")
-templ Home(title string) {
-    @Base(title) {
+// Landing page route!("GET /")
+templ Home() {
+    @Base() {
+        <div class="p-6 grid gap-4 flex flex-col items-center container mx-auto max-w-2xl">
         // Parent card
         @ui.Card("mx-auto max-w-4xl") {
 
@@ -35,7 +37,7 @@ templ Home(title string) {
                     Welcome to templ-shadcn
                 }
                 @ui.CardDescription() {
-                    The ease of Shadcn mixed with the power of Golang, HTMX and Templ.
+                    The ease of Shadcn. The power of Golang, HTMX and Templ.
                 }
             }
             // Card Content
@@ -55,7 +57,15 @@ templ Home(title string) {
                <a class="text-background bg-foreground hover:bg-foreground/80 transition-all ease-in-out p-2 w-full rounded-md text-center" href="/components">View All Components</a>
             }
         }
+        </div>
     }
+}
 
-    @component.Footer()
+// Components page route!("GET /components")
+templ Components() {
+    @Base() {
+        <div class="p-6 grid gap-4 flex flex-col items-center container mx-auto max-w-2xl">
+            <p class="text-foreground">All Components</p>
+        </div>
+    }
 }
