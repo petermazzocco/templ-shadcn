@@ -1,6 +1,7 @@
 package template
 
-import "templ-shadcn/internal/component"
+import ui "templ-shadcn/internal/component/ui"
+import component "templ-shadcn/internal/component"
 
 
 templ Base(title string) {
@@ -26,50 +27,35 @@ templ Base(title string) {
 templ Home(title string) {
     @Base(title) {
         // Parent card
-        @component.Card("mx-auto max-w-4xl") {
-            
+        @ui.Card("mx-auto max-w-4xl") {
+
             // Card Header
-            @component.CardHeader() {
-                @component.CardTitle() {
-                    Shadcn + Golang + Templ + HTMX
+            @ui.CardHeader() {
+                @ui.CardTitle() {
+                    Welcome to templ-shadcn
                 }
-                @component.CardDescription() {
-                    This is a simple card component using Shadcn, Golang, Templ, and HTMX.
+                @ui.CardDescription() {
+                    The ease of Shadcn mixed with the power of Golang, HTMX and Templ.
                 }
             }
             // Card Content
-            @component.CardContent() {
+            @ui.CardContent() {
                 <div class="flex flex-col gap-2">
-                    <h3 class="text-foreground">Welcome to the contents of this card</h3>
-                    <ul class="text-primary">
-                        <li>Uses Shadcn style components</li>
-                        <li>Render with templ</li>
-                        <li>Served via Golang and HTMX</li>
-                    </ul>
+                    <h3 class="text-foreground text-lg">How does it work?</h3>
+                    <ol class="text-primary flex flex-col gap-2" >
+                        <li>All styled components live in the <code class="bg-accent text-xs p-0.5 border border-input text-primary/80 rounded-md">/internal/component/ui</code> folder</li>
+                        <li>Install new components with the command: <code class="bg-accent text-xs p-0.5 border border-input text-primary/80 rounded-md">go install </code> </li>
+                        <li>Import components into the <code class="bg-accent text-xs p-0.5 border border-input text-primary/80 rounded-md">/template</code>folder</li>
+                    </ol>
                 </div>
             }
 
             // Card Footer
-            @component.CardFooter("w-full") {
-                <button class="bg-primary p-2 w-full rounded-md">Get More Information</button>
+            @ui.CardFooter("w-full") {
+               <a class="text-background bg-foreground hover:bg-foreground/80 transition-all ease-in-out p-2 w-full rounded-md text-center" href="/components">View All Components</a>
             }
         }
-        <div class="flex flex-col gap-4"> 
-            // Checkbox for Terms and Conditions with ID, name, and initial state (unchecked)
-            @component.Checkbox("terms-checkbox", "terms", false, false) {
-                Please follow me on <a href="https://bsky.app/profile/hellopeter.dev" target="_blank" class="text-primary underline">Bluesky</a>
-            }
-
-            // Checkbox for newsletter subscription (pre-checked)
-            @component.Checkbox("newsletter", "newsletter", true, false, "") {
-                Subscribe to our newsletter
-            }
-
-            // Disabled checkbox example
-            @component.Checkbox("disabled-example", "disabled-example", false, true, "opacity-50 cursor-not-allowed") {
-                This option is currently unavailable
-            }
-        </div>
     }
-    
+
+    @component.Footer()
 }
