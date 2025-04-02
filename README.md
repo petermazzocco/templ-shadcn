@@ -1,8 +1,13 @@
-# templ-quickstart
+# templ-shadcn
 
 ## Introduction
 
-templ-quickstart provides a quick and easy way to scaffold an Go http server. The tech stack included in this repo includes Go, HTMX, Templ, and Tailwind.
+templ-shadcn is a forked version of [templ-quickstart](https://github.com/Phillip-England/templ-quickstart/tree/main) from Phillip-England. This provides a quick and easy way to scaffold a Go http server. The tech stack included in this repo includes Go, HTMX, Templ, and Tailwind. The component folder features current Shadcn components for easy styling. Please follow the instructions below for set up:
+
+## Supported Components via Shadcn
+
+[x] Card
+[x] Checkbox
 
 ## Core Technologies
 
@@ -19,7 +24,7 @@ As mentioned above, this project depends on some awesome technologies. Let me st
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/phillip-england/templ-quickstart <target-directory>
+git clone https://github.com/petermazzocco/templ-shadcn <target-directory>
 ```
 
 ```bash
@@ -35,7 +40,7 @@ go mod tidy
 ### Create a .env file and include a PORT variable
 
 ```bash
-touch .env; 
+touch .env;
 ```
 
 ```bash
@@ -59,7 +64,7 @@ templ generate --watch
 With the [Tailwind Binary](https://tailwindcss.com/blog/standalone-cli) installed and moved somewhere on your PATH, run the following to generate your CSS output for your tailwind classes (remove --watch to simply build and not hot reload)
 
 ```bash
-tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch
+npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch
 ```
 
 ### Serving with Air
@@ -112,6 +117,7 @@ if err != nil {
     fmt.Println(err)
 }
 ```
+
 ### Middleware - ./internal/middleware/middleware.go
 
 Custom middleware can be implemented with ease in this project. Lets first start with our middleware chain.
@@ -197,7 +203,7 @@ func Home(ctx *middleware.CustomContext, w http.ResponseWriter, r *http.Request)
 	if r.URL.Path != "/" { // catches 404s, only needed in the '/' route for entire app
 		http.NotFound(w, r)
 		return
-	
+
 	}
 	template.Home("Templ Quickstart").Render(ctx, w)
 }
@@ -243,15 +249,15 @@ Also note, htmx and your tailwind output are included in the head of this templa
 <link rel="stylesheet" href="/static/css/output.css"></link>
 ```
 
-### Components - ./internal/component/component.templ
+### Custom Components - ./internal/component/component.templ
 
 Comonents are very similar to templates. Here is an example of the TextAndTitle component used in ./internal/view/view.go
 
 ```html
 templ TextAndTitle(title string, text string) {
-    <div>
-        <h1 class='text-lg font-bold'>{title}</h1>
-        <p class='text-sm'>{text}</p>
-    </div>
+<div>
+  <h1 class="text-lg font-bold">{title}</h1>
+  <p class="text-sm">{text}</p>
+</div>
 }
 ```
