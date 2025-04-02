@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"templ-shadcn/internal/component"
 	"templ-shadcn/internal/generate"
 	"templ-shadcn/internal/middleware"
 	"templ-shadcn/internal/template"
@@ -25,6 +26,11 @@ func main() {
 	mux.HandleFunc("GET /favicon.ico", view.ServeFavicon)
 	mux.HandleFunc("GET /static/", view.ServeStaticFiles)
 
+	mux.HandleFunc("POST /hello-world", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Hello world!")
+		middleware.RenderComponent(w, r, component.HelloWorldResponse())
+	})
+
 	// Landing page route
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
@@ -44,7 +50,6 @@ func main() {
 	})
 
 	// Individual components route
-
 	fmt.Printf("server is running on port 8080")
 	err = http.ListenAndServe(":"+"8080", mux)
 	if err != nil {

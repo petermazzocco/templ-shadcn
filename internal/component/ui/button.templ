@@ -6,115 +6,213 @@ import "templ-shadcn/internal/util"
 type ButtonVariant string
 
 const (
-    ButtonVariantDefault     ButtonVariant = "default"
-    ButtonVariantDestructive ButtonVariant = "destructive"
-    ButtonVariantOutline     ButtonVariant = "outline"
-    ButtonVariantSecondary   ButtonVariant = "secondary"
-    ButtonVariantGhost       ButtonVariant = "ghost"
-    ButtonVariantLink        ButtonVariant = "link"
+	ButtonVariantDefault     ButtonVariant = "default"
+	ButtonVariantDestructive ButtonVariant = "destructive"
+	ButtonVariantOutline     ButtonVariant = "outline"
+	ButtonVariantSecondary   ButtonVariant = "secondary"
+	ButtonVariantGhost       ButtonVariant = "ghost"
+	ButtonVariantLink        ButtonVariant = "link"
 )
 
 // ButtonSize represents the size of a button
 type ButtonSize string
 
 const (
-    ButtonSizeDefault ButtonSize = "default"
-    ButtonSizeSm      ButtonSize = "sm"
-    ButtonSizeLg      ButtonSize = "lg"
-    ButtonSizeIcon    ButtonSize = "icon"
+	ButtonSizeDefault ButtonSize = "default"
+	ButtonSizeSm      ButtonSize = "sm"
+	ButtonSizeLg      ButtonSize = "lg"
+	ButtonSizeIcon    ButtonSize = "icon"
 )
 
 // ButtonProps holds the configuration for a button
 type ButtonProps struct {
-    Type      string
-    Variant   ButtonVariant
-    Size      ButtonSize
-    Disabled  bool
-    ClassName []string
+	Type      string
+	Variant   ButtonVariant
+	Size      ButtonSize
+	Disabled  bool
+	ClassName []string
+	// HTMX attributes
+	HxGet       string
+	HxPost      string
+	HxPut       string
+	HxDelete    string
+	HxPatch     string
+	HxSwap      string
+	HxTarget    string
+	HxTrigger   string
+	HxIndicator string
+	HxConfirm   string
+	HxExt       string
+	HxVals      string
+	HxPushUrl   string
+	HxSelect    string
+	HxParams    string
+	HxHeaders   string
+	HxBoost     string
 }
 
 // NewButtonProps creates button props with default values
 func NewButtonProps() ButtonProps {
-    return ButtonProps{
-        Type:     "button",
-        Variant:  ButtonVariantDefault,
-        Size:     ButtonSizeDefault,
-        Disabled: false,
-    }
+	return ButtonProps{
+		Type:     "button",
+		Variant:  ButtonVariantDefault,
+		Size:     ButtonSizeDefault,
+		Disabled: false,
+	}
 }
 
 // getButtonClasses returns the appropriate CSS classes based on button variant and size
 func getButtonClasses(variant ButtonVariant, size ButtonSize) string {
-    // Base classes for all buttons
-    baseClasses := "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-    
-    // Variant-specific classes
-    var variantClasses string
-    switch variant {
-    case ButtonVariantDefault:
-        variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90"
-    case ButtonVariantDestructive:
-        variantClasses = "bg-destructive text-destructive-foreground hover:bg-destructive/90"
-    case ButtonVariantOutline:
-        variantClasses = "border border-input bg-background hover:bg-accent hover:text-accent-foreground"
-    case ButtonVariantSecondary:
-        variantClasses = "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-    case ButtonVariantGhost:
-        variantClasses = "hover:bg-accent hover:text-accent-foreground"
-    case ButtonVariantLink:
-        variantClasses = "text-primary underline-offset-4 hover:underline"
-    default:
-        variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90"
-    }
-    
-    // Size-specific classes
-    var sizeClasses string
-    switch size {
-    case ButtonSizeDefault:
-        sizeClasses = "h-10 px-4 py-2"
-    case ButtonSizeSm:
-        sizeClasses = "h-9 rounded-md px-3"
-    case ButtonSizeLg:
-        sizeClasses = "h-11 rounded-md px-8"
-    case ButtonSizeIcon:
-        sizeClasses = "h-10 w-10"
-    default:
-        sizeClasses = "h-10 px-4 py-2"
-    }
-    
-    return baseClasses + " " + variantClasses + " " + sizeClasses
+	// Base classes for all buttons
+	baseClasses := "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+
+	// Variant-specific classes
+	var variantClasses string
+	switch variant {
+	case ButtonVariantDefault:
+		variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90"
+	case ButtonVariantDestructive:
+		variantClasses = "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+	case ButtonVariantOutline:
+		variantClasses = "border border-input bg-background hover:bg-accent hover:text-accent-foreground"
+	case ButtonVariantSecondary:
+		variantClasses = "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+	case ButtonVariantGhost:
+		variantClasses = "hover:bg-accent hover:text-accent-foreground"
+	case ButtonVariantLink:
+		variantClasses = "text-primary underline-offset-4 hover:underline"
+	default:
+		variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90"
+	}
+
+	// Size-specific classes
+	var sizeClasses string
+	switch size {
+	case ButtonSizeDefault:
+		sizeClasses = "h-10 px-4 py-2"
+	case ButtonSizeSm:
+		sizeClasses = "h-9 rounded-md px-3"
+	case ButtonSizeLg:
+		sizeClasses = "h-11 rounded-md px-8"
+	case ButtonSizeIcon:
+		sizeClasses = "h-10 w-10"
+	default:
+		sizeClasses = "h-10 px-4 py-2"
+	}
+
+	return baseClasses + " " + variantClasses + " " + sizeClasses
 }
 
 // Button renders a button with the given properties
 templ Button(props ButtonProps) {
-    <button
-        type={ props.Type }
-        disabled?={ props.Disabled }
-        class={util.Cn(getButtonClasses(props.Variant, props.Size)), props.ClassName}
-    >
-        { children... }
-    </button>
+	<button
+		type={ props.Type }
+		if props.Disabled {
+			disabled
+		}
+		class={ util.Cn(getButtonClasses(props.Variant, props.Size)), props.ClassName }
+		if props.HxGet != "" {
+			hx-get={ props.HxGet }
+		}
+		if props.HxPost != "" {
+			hx-post={ props.HxPost }
+		}
+		if props.HxPut != "" {
+			hx-put={ props.HxPut }
+		}
+		if props.HxDelete != "" {
+			hx-delete={ props.HxDelete }
+		}
+		if props.HxPatch != "" {
+			hx-patch={ props.HxPatch }
+		}
+		if props.HxSwap != "" {
+			hx-swap={ props.HxSwap }
+		}
+		if props.HxTarget != "" {
+			hx-target={ props.HxTarget }
+		}
+		if props.HxTrigger != "" {
+			hx-trigger={ props.HxTrigger }
+		}
+		if props.HxIndicator != "" {
+			hx-indicator={ props.HxIndicator }
+		}
+		if props.HxConfirm != "" {
+			hx-confirm={ props.HxConfirm }
+		}
+		if props.HxExt != "" {
+			hx-ext={ props.HxExt }
+		}
+		if props.HxVals != "" {
+			hx-vals={ props.HxVals }
+		}
+		if props.HxPushUrl != "" {
+			hx-push-url={ props.HxPushUrl }
+		}
+		if props.HxSelect != "" {
+			hx-select={ props.HxSelect }
+		}
+		if props.HxParams != "" {
+			hx-params={ props.HxParams }
+		}
+		if props.HxHeaders != "" {
+			hx-headers={ props.HxHeaders }
+		}
+		if props.HxBoost != "" {
+			hx-boost={ props.HxBoost }
+		}
+	>
+		{ children... }
+	</button>
 }
 
 // SimpleButton is a convenience wrapper for common button usage
 templ SimpleButton(variant ButtonVariant, size ButtonSize, className ...string) {
-    @Button(ButtonProps{
-        Type:      "button",
-        Variant:   variant,
-        Size:      size,
-        Disabled:  false,
-        ClassName: className,
-    }) {
-        { children... }
-    }
+	@Button(ButtonProps{
+		Type:      "button",
+		Variant:   variant,
+		Size:      size,
+		Disabled:  false,
+		ClassName: className,
+	}) {
+		{ children... }
+	}
+}
+
+// HtmxButton is a convenience wrapper for HTMX button usage
+templ HtmxButton(variant ButtonVariant, size ButtonSize, hxAction, hxTarget, hxSwap string, className ...string) {
+	@Button(ButtonProps{
+		Type:      "button",
+		Variant:   variant,
+		Size:      size,
+		HxPost:    hxAction, // Defaults to POST, most common HTMX action
+		HxTarget:  hxTarget,
+		HxSwap:    hxSwap,
+		ClassName: className,
+	}) {
+		{ children... }
+	}
 }
 
 // LinkButton creates a button that looks like a link
 templ LinkButton(href string, variant ButtonVariant, size ButtonSize, className ...string) {
-    <a
-        href={ templ.SafeURL(href) }
-        class={util.Cn(getButtonClasses(variant, size)), className}
-    >
-        { children... }
-    </a>
+	<a
+		href={ templ.SafeURL(href) }
+		class={ util.Cn(getButtonClasses(variant, size)), className }
+	>
+		{ children... }
+	</a>
+}
+
+// FormButton is a convenience wrapper for submit buttons in forms
+templ FormButton(variant ButtonVariant, size ButtonSize, className ...string) {
+	@Button(ButtonProps{
+		Type:      "submit",
+		Variant:   variant,
+		Size:      size,
+		ClassName: className,
+	}) {
+		{ children... }
+	}
 }

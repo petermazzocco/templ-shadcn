@@ -48,3 +48,9 @@ func ParseMultipartForm(ctx *CustomContext, w http.ResponseWriter, r *http.Reque
 	r.ParseMultipartForm(10 << 20)
 	return nil
 }
+
+// RenderComponent renders a component directly without additional middleware
+func RenderComponent(w http.ResponseWriter, r *http.Request, component templ.Component) {
+	w.Header().Set("Content-Type", "text/html")
+	component.Render(r.Context(), w)
+}

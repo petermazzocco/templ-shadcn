@@ -1,0 +1,10 @@
+package component
+
+// HelloWorldResponse is the response to the hello world button click
+templ HelloWorldResponse() {
+	<div class="flex flex-col items-center gap-4" id="helloWorld">
+		<p class="text-foreground font-bold">Hello, World!</p>
+		<p class="text-muted-foreground">The button was clicked successfully and worked thanks to HTMX!</p>
+		<p class="text-muted-foreground">The Button inherits the attributes of HTMX like "hx-post". </p>
+	</div>
+}
