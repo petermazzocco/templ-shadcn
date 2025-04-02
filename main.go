@@ -21,6 +21,7 @@ func main() {
 	_ = godotenv.Load()
 	mux := http.NewServeMux()
 
+	// Load static assets
 	mux.HandleFunc("GET /favicon.ico", view.ServeFavicon)
 	mux.HandleFunc("GET /static/", view.ServeStaticFiles)
 

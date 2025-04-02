@@ -54,7 +54,9 @@ templ Home() {
 
             // Card Footer
             @ui.CardFooter("w-full") {
-               <a class="text-background bg-foreground hover:bg-foreground/80 transition-all ease-in-out p-2 w-full rounded-md text-center" href="/components">View All Components</a>
+               @ui.LinkButton("/components", "default", "sm") {
+                View All Components
+               }
             }
         }
         </div>

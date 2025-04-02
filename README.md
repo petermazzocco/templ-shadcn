@@ -11,6 +11,7 @@ templ-shadcn is a forked version of [templ-quickstart](https://github.com/Philli
 - [ ] Alert Dialog
 - [ ] Avatar
 - [ ] Badge
+- [x] Button
 - [x] Card
 - [x] Checkbox
 - [ ] Collapsible
