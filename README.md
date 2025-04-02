@@ -6,8 +6,40 @@ templ-shadcn is a forked version of [templ-quickstart](https://github.com/Philli
 
 ## Supported Components via Shadcn
 
-[x] Card
-[x] Checkbox
+- [ ] Accordion
+- [ ] Alert
+- [ ] Alert Dialog
+- [ ] Avatar
+- [ ] Badge
+- [x] Card
+- [x] Checkbox
+- [ ] Collapsible
+- [ ] Command
+- [ ] Context Menu
+- [ ] Dialog
+- [ ] Dropdown Menu
+- [ ] Form
+- [ ] Hover Card
+- [ ] Input
+- [ ] Label
+- [ ] Menubar
+- [ ] Navigation Menu
+- [ ] Popover
+- [ ] Progress
+- [ ] Radio Group
+- [ ] ScrollArea
+- [ ] Select
+- [ ] Separator
+- [ ] Sheet
+- [ ] Skeleton
+- [ ] Slider
+- [ ] Switch
+- [ ] Table
+- [ ] Tabs
+- [ ] Textarea
+- [ ] Toast
+- [ ] Toggle
+- [ ] Tooltip
 
 ## Core Technologies
 
