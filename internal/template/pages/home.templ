@@ -3,7 +3,7 @@ package pages
 import ui "templ-shadcn/internal/component/ui"
 
 templ HomePage() {
-	<div class="p-6 grid gap-4 flex flex-col items-center container mx-auto max-w-2xl">
+	<div class="p-6 grid gap-4 flex flex-col justify-center min-h-screen items-center container mx-auto max-w-2xl">
 		// Parent card
 		@ui.Card(ui.CardProps{
 			ClassName: []string{"w-[350px] md:w-[500px] mx-auto"},
@@ -34,42 +34,6 @@ templ HomePage() {
 			}) {
 				@ui.LinkButton("/components", "default", "sm", "w-full") {
 					View All Components
-				}
-			}
-		}
-		// Hello World Card
-		@ui.Card(ui.CardProps{
-			ClassName: []string{"w-[350px] md:w-[500px] mx-auto"},
-		}) {
-			// Card Header
-			@ui.CardHeader() {
-				@ui.CardTitle() {
-					Test out HTMX 
-				}
-				@ui.CardDescription() {
-					Click the button below to see the message appear 👇
-				}
-			}
-			// Card Content
-			@ui.CardContent() {
-				<div id="helloWorld" class="mt-4">
-					<!-- The response will be inserted here -->
-				</div>
-			}
-			// Card Footer
-			@ui.CardFooter(ui.CardProps{
-				ClassName: []string{"w-full"},
-			}) {
-				@ui.Button(ui.ButtonProps{
-					Type:      "button",
-					Variant:   ui.ButtonVariantDefault,
-					Size:      ui.ButtonSizeDefault,
-					HxPost:    "/hello-world",
-					HxSwap:    "innerHTML",
-					HxTarget:  "#helloWorld",
-					ClassName: []string{"w-full"},
-				}) {
-					Say Hello World!
 				}
 			}
 		}

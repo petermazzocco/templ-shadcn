@@ -29,7 +29,7 @@ func ComponentsPage() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"p-6 grid gap-4 flex flex-col items-center container mx-auto max-w-2xl\"><p class=\"text-foreground\">All Components</p></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"p-6 grid gap-4 flex flex-col min-h-screen\"><p class=\"text-foreground\">All Components</p></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -1,9 +1,9 @@
 package template
 
-import "templ-shadcn/internal/template/pages"
-
+import pages "templ-shadcn/internal/template/pages"
 import component "templ-shadcn/internal/component"
 
+// Global layout
 templ Layout() {
 	<html>
 		<head>
@@ -41,5 +41,19 @@ templ Home() {
 templ Components() {
 	@Layout() {
 		@pages.ComponentsPage()
+	}
+}
+
+// Specific component page route! ("GET /components/{name}")
+templ Component(name string) {
+	@Layout() {
+		@pages.ComponentPage(name)
+	}
+}
+
+// Not found page
+templ NotFound() {
+	@Layout() {
+		@pages.NotFound()
 	}
 }

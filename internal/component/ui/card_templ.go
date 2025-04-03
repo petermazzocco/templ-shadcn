@@ -372,7 +372,7 @@ func Card(props ...CardProps) templ.Component {
 			templ_7745c5c3_Var19 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var20 = []any{util.Cn("rounded-lg border bg-card text-card-foreground shadow-sm"), getProps(props...).ClassName}
+		var templ_7745c5c3_Var20 = []any{util.Cn("rounded-lg border border-muted-foreground bg-card text-card-foreground shadow-sm"), getProps(props...).ClassName}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var20...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

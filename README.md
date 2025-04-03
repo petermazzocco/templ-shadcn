@@ -35,7 +35,7 @@ templ-shadcn is a forked version of [templ-quickstart](https://github.com/Philli
 - [ ] Skeleton
 - [ ] Slider
 - [ ] Switch
-- [ ] Table
+- [x] Table
 - [ ] Tabs
 - [ ] Textarea
 - [ ] Toast

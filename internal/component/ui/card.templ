@@ -50,7 +50,7 @@ templ CardFooter(props ...CardProps) {
 }
 
 templ Card(props ...CardProps) {
-	<div class={ util.Cn("rounded-lg border bg-card text-card-foreground shadow-sm"), getProps(props...).ClassName }>
+	<div class={ util.Cn("rounded-lg border border-muted-foreground bg-card text-card-foreground shadow-sm"), getProps(props...).ClassName }>
 		{ children... }
 	</div>
 }
